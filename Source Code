@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+public class PasswordStrengthChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Password Strength Checker");
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+
+        boolean hasUppercase = false;
+        boolean hasLowercase = false;
+        boolean hasNumber = false;
+        boolean hasSpecialCharacter = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char character = password.charAt(i);
+
+            if (Character.isUpperCase(character)) {
+                hasUppercase = true;
+            } else if (Character.isLowerCase(character)) {
+                hasLowercase = true;
+            } else if (Character.isDigit(character)) {
+                hasNumber = true;
+            } else {
+                hasSpecialCharacter = true;
+            }
+        }
+
+        int score = 0;
+
+        if (password.length() >= 8) {
+            score++;
+        }
+
+        if (hasUppercase) {
+            score++;
+        }
+
+        if (hasLowercase) {
+            score++;
+        }
+
+        if (hasNumber) {
+            score++;
+        }
+
+        if (hasSpecialCharacter) {
+            score++;
+        }
+
+        System.out.println();
+        System.out.println("Password Analysis:");
+
+        if (password.length() < 8) {
+            System.out.println("- Password should be at least 8 characters long.");
+        }
+
+        if (!hasUppercase) {
+            System.out.println("- Add at least one uppercase letter.");
+        }
+
+        if (!hasLowercase) {
+            System.out.println("- Add at least one lowercase letter.");
+        }
+
+        if (!hasNumber) {
+            System.out.println("- Add at least one number.");
+        }
+
+        if (!hasSpecialCharacter) {
+            System.out.println("- Add at least one special character.");
+        }
+
+        System.out.println();
+
+        if (score == 5) {
+            System.out.println("Password Strength: Very Strong");
+        } else if (score == 4) {
+            System.out.println("Password Strength: Strong");
+        } else if (score == 3) {
+            System.out.println("Password Strength: Medium");
+        } else if (score == 2) {
+            System.out.println("Password Strength: Weak");
+        } else {
+            System.out.println("Password Strength: Very Weak");
+        }
+
+        scanner.close();
+    }
+}
